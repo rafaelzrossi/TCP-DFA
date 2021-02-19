@@ -495,6 +495,27 @@ body{
 	top: 9.2%;
 }
 
+/* LAST-ACK -> CLOSED */
+.l30{
+	width: 4px;
+	height: 5%;
+	background-color: black;
+	
+	position: absolute;
+	top: 76.2%;
+}
+
+.l31{
+	width: 13.3%;
+	height: 4px;
+	background-color: black;
+
+	position: absolute;
+	top: 81%;
+	left: 62.9%;
+}
+
+
 
 .controls{
 	width: 20%;
