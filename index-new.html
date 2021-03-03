@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TCP-DFA</title>
+
+	<link rel="stylesheet" href="style-new.css">
+	<link rel="stylesheet" href="line-color.css">
+	<link rel="stylesheet" href="lines.css">
+</head>
+<body>
+	
+	<div class="content">
+		<div class="border"></div>
+
+
+		<div class="row">
+			<div class="state"><span>CLOSED</span></div>
+
+			<div class="line1-0 line1-color">
+				<div class="triangle1 line1-color"></div>
+			</div>
+
+			<div class="line2-0 line2-color">
+				<div class="triangle2 line2-color"></div>
+			</div>
+
+
+
+			<div class="line3-0 line3-color"></div>
+		</div>
+
+
+		<div class="row">
+			<div class="state"><span>LISTEN</span></div>
+		</div>
+
+
+		<div class="row">
+			<div class="state"><span>SYN SENT</span></div>
+			<div class="state hidden"><span></span></div>
+
+			
+			<div class="state"><span>SYN RECEIVED</span></div>
+		</div>
+
+
+		<div class="row">
+			<div class="state"><span>ESTABLISHED</span></div>
+		</div>
+
+
+		<div class="row">
+			<div class="state"><span>FIN WAIT 1</span></div>
+			<div class="state"><span>CLOSING</span></div>
+			<div class="state"><span>CLOSE WAIT</span></div>
+		</div>
+
+
+		<div class="row">
+			<div class="state"><span>FIN WAIT 2</span></div>
+			<div class="state"><span>TIME WAIT</span></div>
+			<div class="state"><span>LAST ACK</span></div>
+		</div>
+
+		<div class="border"></div>
+	</div>
+	
+	<div class="commands"></div>
+
+</body>
+</html>

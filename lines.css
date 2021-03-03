@@ -1,0 +1,71 @@
+.line1-0{
+	width: 4px;
+	height: 8%;
+
+	position: absolute;
+	left: 37%;
+	top: 15%;
+
+	display: flex;
+	justify-content: center;
+}
+
+.triangle1{
+	width: 0; 
+  height: 0; 
+  border-left: 8px solid white;
+  border-right: 8px solid white;
+  
+  border-top: 8px solid transparent;
+
+	position: absolute;
+	top: 100%;
+}
+
+
+
+
+
+.line2-0{
+	width: 4px;
+	height: 8%;
+
+	position: absolute;
+	left: 43%;
+	top: calc(15% + 8px);
+
+	display: flex;
+	justify-content: center;
+}
+
+.triangle2{
+	width: 0; 
+  height: 0; 
+  border-left: 8px solid white;
+  border-right: 8px solid white;
+  
+  border-bottom: 8px solid transparent;
+
+	position: absolute;
+	bottom: 100%;
+}
+
+
+
+
+
+.line3-0{
+	width: 10%;
+	height: 4px;
+
+	position: absolute;
+	left: 46.4%;
+}
+
+.line3-1{
+	width: 10px;
+	height: 10px;
+
+	position: absolute;
+	left: 60%;
+}
