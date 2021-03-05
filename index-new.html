@@ -8,6 +8,19 @@
 	<link rel="stylesheet" href="style-new.css">
 	<link rel="stylesheet" href="line-color.css">
 	<link rel="stylesheet" href="lines.css">
+
+	<script>
+		function red(num){
+			str = "line"+num+"-color";
+
+			elements = document.getElementsByClassName(str);
+			len = elements.length
+
+			for(i = 0; i < len; i++){
+				elements[i].style.backgroundColor = "red"
+			}
+		}
+	</script>
 </head>
 <body>
 	
@@ -19,21 +32,41 @@
 			<div class="state"><span>CLOSED</span></div>
 
 			<div class="line1-0 line1-color">
-				<div class="triangle1 line1-color"></div>
+				<div class="triangle-down triangle1 line1-color"></div>
 			</div>
 
 			<div class="line2-0 line2-color">
-				<div class="triangle2 line2-color"></div>
+				<div class="triangle-up triangle2 line2-color"></div>
 			</div>
 
 
 
 			<div class="line3-0 line3-color"></div>
+			<div class="line3-1 line3-color">
+				<div class="triangle-down triangle3 line3-color"></div>
+			</div>
+
+
+			<div class="line4-0 line4-color"></div>
+			<div class="line4-1 line4-color">
+				<div class="triangle-left triangle4 line4-color"></div>
+			</div>
 		</div>
 
 
 		<div class="row">
 			<div class="state"><span>LISTEN</span></div>
+
+			<div class="line5-0 line5-color"></div>
+			<div class="line5-1 line5-color">
+				<div class="triangle-down triangle5 line5-color"></div>
+			</div>
+
+
+			<div class="line6-0 line6-color"></div>
+			<div class="line6-1 line6-color">
+				<div class="triangle-up triangle6 line6-color"></div>
+			</div>
 		</div>
 
 

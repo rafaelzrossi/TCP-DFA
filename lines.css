@@ -1,3 +1,35 @@
+.triangle-up{
+	width: 0; 
+  height: 0; 
+  border-left: 8px solid white;
+  border-right: 8px solid white;
+  
+  border-bottom: 8px solid transparent;
+}
+
+.triangle-down{
+	width: 0; 
+  height: 0; 
+  border-left: 8px solid white;
+  border-right: 8px solid white;
+  
+  border-top: 8px solid transparent;
+}
+
+.triangle-left{
+	width: 0; 
+	height: 0; 
+	border-top: 8px solid white;
+	border-bottom: 8px solid white;
+	
+	border-right: 8px solid transparent;
+}
+
+
+
+
+
+
 .line1-0{
 	width: 4px;
 	height: 8%;
@@ -11,13 +43,6 @@
 }
 
 .triangle1{
-	width: 0; 
-  height: 0; 
-  border-left: 8px solid white;
-  border-right: 8px solid white;
-  
-  border-top: 8px solid transparent;
-
 	position: absolute;
 	top: 100%;
 }
@@ -39,13 +64,6 @@
 }
 
 .triangle2{
-	width: 0; 
-  height: 0; 
-  border-left: 8px solid white;
-  border-right: 8px solid white;
-  
-  border-bottom: 8px solid transparent;
-
 	position: absolute;
 	bottom: 100%;
 }
@@ -55,17 +73,123 @@
 
 
 .line3-0{
-	width: 10%;
+	width: 19.7%;
 	height: 4px;
 
 	position: absolute;
 	left: 46.4%;
+	top: calc(11.5% - 2px)
 }
 
 .line3-1{
-	width: 10px;
-	height: 10px;
+	width: 4px;
+	height: 27%;
 
 	position: absolute;
-	left: 60%;
+	left: calc(66% - 2px);
+	top: calc(11.5% - 2px);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.triangle3{
+	position: absolute;
+	top: 100%;
+	/* left: calc(63% - 8px) */
+}
+
+
+
+
+
+.line4-0{
+	width: 4px;
+	height: 26%;
+
+	position: absolute;
+	left: calc(60% - 2px);
+	top: calc(13.5% - 2px)
+}
+
+.line4-1{
+	width: 13.1%;
+	height: 4px;
+
+	position: absolute;
+	left: 47%;
+	top: calc(13.5% - 2px);
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.triangle4{
+	position: absolute;
+	right: 100%;
+	/* top: calc(13.5% - 6px); */
+}
+
+
+
+
+
+.line5-0{
+	width: 13.1%;
+	height: 4px;
+
+	position: absolute;
+	left: 20%;
+	top: calc(27.5% - 2px)
+}
+
+.line5-1{
+	width: 4px;
+	height: 11%;
+
+	position: absolute;
+	left: calc(20% - 2px);
+	top: calc(27.5% - 2px);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.triangle5{
+	position: absolute;
+	top: 100%;
+}
+
+
+
+
+
+.line6-0{
+	height: 4px;
+	width: 13.5%;
+
+	position: absolute;
+	top: 41.5%;
+	left: 23.5%;
+}
+
+.line6-1{
+	width: 4px;
+	height: 10%;
+
+	position: absolute;
+	left: 37%;
+	top: 32%;
+
+	display: flex;
+	align-content: center;
+	justify-content: center;
+}
+
+.triangle6{
+	position: absolute;
+	bottom: 100%;
 }
