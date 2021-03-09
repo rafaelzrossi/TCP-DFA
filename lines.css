@@ -25,6 +25,15 @@
 	border-right: 8px solid transparent;
 }
 
+.triangle-right{
+	width: 0; 
+	height: 0; 
+	border-top: 8px solid white;
+	border-bottom: 8px solid white;
+	
+	border-left: 8px solid transparent;
+}
+
 
 
 
@@ -192,4 +201,61 @@
 .triangle6{
 	position: absolute;
 	bottom: 100%;
+}
+
+
+
+
+
+.line7-0{
+	width: 4px;
+	height: 10%;
+
+	position: absolute;
+	left: 43%;
+	top: 32%;
+
+	display: flex;
+	align-content: center;
+	justify-content: center;
+}
+
+.line7-1{
+	height: 4px;
+	width: 12.5%;
+
+	position: absolute;
+	top: 41.5%;
+	left: 43%;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.triangle7{
+	position: absolute;
+	left: 100%;
+}
+
+
+
+
+
+.line8-0{
+	height: 4px;
+	width: 32.5%;
+
+	position: absolute;
+	top: 43.5%;
+	left: 23.5%;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.triangle8{
+	position: absolute;
+	left: 0;
 }
