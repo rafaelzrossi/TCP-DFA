@@ -8,19 +8,6 @@
 	<link rel="stylesheet" href="style-new.css">
 	<link rel="stylesheet" href="line-color.css">
 	<link rel="stylesheet" href="lines.css">
-
-	<script>
-		function red(num){
-			str = "line"+num+"-color";
-
-			elements = document.getElementsByClassName(str);
-			len = elements.length
-
-			for(i = 0; i < len; i++){
-				elements[i].style.backgroundColor = "red"
-			}
-		}
-	</script>
 </head>
 <body>
 	
@@ -29,7 +16,7 @@
 
 
 		<div class="row">
-			<div class="state"><span>CLOSED</span></div>
+			<div class="state state1"><span>CLOSED</span></div>
 
 			<div class="line1-0 line1-color">
 				<div class="triangle-down triangle1 line1-color"></div>
@@ -55,7 +42,7 @@
 
 
 		<div class="row">
-			<div class="state"><span>LISTEN</span></div>
+			<div class="state state2"><span>LISTEN</span></div>
 
 			<div class="line5-0 line5-color"></div>
 			<div class="line5-1 line5-color">
@@ -82,7 +69,7 @@
 
 
 		<div class="row">
-			<div class="state"><span>SYN SENT</span></div>
+			<div class="state state3"><span>SYN SENT</span></div>
 			<div class="state hidden"><span></span></div>
 
 			<div class="line9-0 line9-color"></div>
@@ -97,7 +84,7 @@
 
 
 			
-			<div class="state"><span>SYN RECEIVED</span></div>
+			<div class="state state4"><span>SYN RECEIVED</span></div>
 
 			<div class="line11-0 line11-color"></div>
 			<div class="line11-1 line11-color">
@@ -107,7 +94,7 @@
 
 
 		<div class="row">
-			<div class="state"><span>ESTABLISHED</span></div>
+			<div class="state state5"><span>ESTABLISHED</span></div>
 
 			<div class="line12-0 line12-color"></div>
 			<div class="line12-1 line12-color"></div>
@@ -124,7 +111,7 @@
 
 
 		<div class="row">
-			<div class="state"><span>FIN WAIT 1</span></div>
+			<div class="state state6"><span>FIN WAIT 1</span></div>
 
 			<div class="line14-0 line14-color">
 				<div class="triangle14 line14-color triangle-right"></div>
@@ -138,13 +125,13 @@
 
 
 
-			<div class="state"><span>CLOSING</span></div>
+			<div class="state state8"><span>CLOSING</span></div>
 			<div class="line18-0 line18-color">
 				<div class="triangle18 line18-color triangle-down"></div>
 			</div>
 
 
-			<div class="state"><span>CLOSE WAIT</span></div>
+			<div class="state state9"><span>CLOSE WAIT</span></div>
 
 			<div class="line20-0 line20-color">
 				<div class="triangle20 line20-color triangle-down"></div>
@@ -154,7 +141,7 @@
 
 
 		<div class="row">
-			<div class="state"><span>FIN WAIT 2</span></div>
+			<div class="state state7"><span>FIN WAIT 2</span></div>
 			
 			<div class="line16-0 line16-color">
 				<div class="triangle16 line16-color triangle-down"></div>
@@ -165,20 +152,20 @@
 			</div>
 
 
-			<div class="state"><span>TIME WAIT</span></div>
+			<div class="state state11"><span>TIME WAIT</span></div>
 
 			<div class="line19-0 line19-color"></div>
 
-			<div class="state"><span>LAST ACK</span></div>
+			<div class="state state10"><span>LAST ACK</span></div>
 
 			<div class="line21-0 line21-color"></div>
 
 
-			<div class="line-end-0 end-color"></div>
-			<div class="line-end-1 end-color"></div>
-			<div class="line-end-2 end-color"></div>
-			<div class="line-end-3 end-color">
-				<div class="triangle-end end-color triangle-down"></div>
+			<div class="line-end-0 line21-color line19-color"></div>
+			<div class="line-end-1 line21-color line19-color"></div>
+			<div class="line-end-2 line21-color line19-color"></div>
+			<div class="line-end-3 line21-color line19-color">
+				<div class="triangle-end line21-color line19-color triangle-down"></div>
 			</div>
 		</div>
 
@@ -193,40 +180,41 @@
 
 		<div class="command-box">
 			<div class="row">
-				<button>LISTEN</button>
-				<button>CLOSE</button>
+				<button class="btn-LISTEN">LISTEN</button>
+				<button class="btn-CLOSE">CLOSE</button>
 			</div>
 
 			<div class="row">
-				<button>CONNECT</button>
-				<button>SEND</button>
+				<button class="btn-CONNECT">CONNECT</button>
+				<button class="btn-SEND">SEND</button>
 			</div>
 
 			<div class="row">
-				<button>RECEIVE SYN</button>
-				<button>RECEIVE ACK</button>
+				<button class="btn-RCV-SYN">RECEIVE SYN</button>
+				<button class="btn-RCV-ACK">RECEIVE ACK</button>
 			</div>
 
 			<div class="row">
-				<button>RST</button>
-				<button>FIN</button>
+				<button class="btn-RST">RST</button>
+				<button class="btn-FIN">FIN</button>
 			</div>
 
 			<div class="row">
-				<button>TIMEOUT</button>
+				<button class="btn-TIMEOUT">TIMEOUT</button>
 			</div>
 		</div>
 
 
-		<div class="btn-run">
+		<div class="btn-run run-instructions">
 			<button>RUN INSTRUCTIONS</button>
 		</div>
 
 
 		<div class="pending-commands">
-			LOG INSTRUCTIONS HERE
 		</div>
 	</div>
 
+
+	<script src="script.js"></script>
 </body>
 </html>

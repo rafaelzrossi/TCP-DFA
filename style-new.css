@@ -127,6 +127,15 @@ body{
 	background-color: cornsilk;
 
 	display: flex;
-	align-items: center;
-	justify-content: center;
+	flex-direction: column;
+
+	overflow: scroll;
+
+	
+	/* align-items: center; */
+	/* justify-content: center; */
+}
+
+.commands .pending-commands span{
+	margin: 2%;
 }
