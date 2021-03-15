@@ -27,8 +27,6 @@ const e_TIME_WAIT    = 11;
 
 
 
-
-
 // Função de sleep.
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -232,12 +230,17 @@ function highlightCurrentState(currentState){
 
 
 async function runInstructions(instructions, currentState){
-	
+	//Informe se durante a execução do sistema, o estado foi alterado alguma vez.
+	hasUpdated = false;
+
+	[instructions, currentState] = dfaReset(instructions, currentState);
+
+
 	len = instructions.length;
 
 	if(instructions === []) return;
 
-	while(instructions !== []){
+	while(instructions.length !== 0){
 		sleepTime = 400 // Variável para controlar o atraso na animação.
 
 		//Extrai a primeira instrução do vetor e remove a instrução da UI.
@@ -245,27 +248,31 @@ async function runInstructions(instructions, currentState){
 		removeFirstLogElement();
 
 
-		// inst = tryCombo(inst, instructions);
+		if(transition[currentState][inst] !== undefined){
+			// Realiza a transição de estado.
+			[newState, lineRef] = transition[currentState][inst];
 
+			// Animação de troca de estado.
+			await sleep(sleepTime + 200);
+			highlightCurrentState(currentState);
+			await sleep(sleepTime);
+			red(lineRef)
+			await sleep(sleepTime);
+			red(lineRef)
+			await sleep(sleepTime);
+			highlightCurrentState(newState);
+			
 
-		// Realiza a transição de estado.
-		[newState, lineRef] = transition[currentState][inst];
+			// Atualiza Estado atual.
+			currentState = newState;
+			hasUpdated = true;
+		}
 
-
-		// Animação de troca de estado.
-		await sleep(sleepTime + 200);
-		highlightCurrentState(currentState);
-		await sleep(sleepTime);
-		red(lineRef)
-		await sleep(sleepTime);
-		red(lineRef)
-		await sleep(sleepTime);
-		highlightCurrentState(newState);
 		
-
-		// Atualiza Estado atual.
-		currentState = newState;
 	}
+
+	if(hasUpdated) dfaResponse(currentState);
+	return currentState;
 }
 
 
@@ -282,7 +289,7 @@ function setListeners() {
 	document.getElementsByClassName("btn-TIMEOUT")[0].addEventListener(      'click', () => {instructions.push(c_TIMEOUT); addLog("TIMEOUT", instructions); } );
 	document.getElementsByClassName("btn-combo-syn-ack")[0].addEventListener('click', () => {instructions.push(combo_syn_ack); addLog("SYN + ACK", instructions)});
 	document.getElementsByClassName("btn-combo-fin-ack")[0].addEventListener('click', () => {instructions.push(combo_fin_ack); addLog("FIN + ACK", instructions)});
-	document.getElementsByClassName("run-instructions")[0].addEventListener( 'click', () => runInstructions(instructions, currentState) );
+	document.getElementsByClassName("run-instructions")[0].addEventListener( 'click', async () => {currentState = await runInstructions(instructions, currentState)} );
 	
 	
 	//Adiciona um Atalho (Barra de Espaço) para o botão "Run Instructions".
@@ -290,18 +297,38 @@ function setListeners() {
 }
 
 
-// REMOVE THIS BEFORE FINISHING THE PROJECT.
-function asd() {
-	console.log(instructions)
+function initializeSystem(){
+	setListeners();
+	
+	currentState = e_CLOSED;
+	highlightCurrentState(currentState)
+	instructions = []
 }
 
 
+function resetSystem(){
+	highlightCurrentState(currentState);
+	currentState = e_CLOSED;
+	highlightCurrentState(currentState);
+	instructions = [];
+}
 
 
+function dfaReset(instructions, currentState){
+	if(currentState === e_CLOSED){
+		return [instructions, currentState];
+	}
+	else{
+		resetSystem();
+		return [instructions, e_CLOSED];
+	}
+}
 
-/* Inicialização do Sistema */
-setListeners();
-
-currentState = e_CLOSED;
-highlightCurrentState(currentState)
-instructions = []
+function dfaResponse(currentState){
+	if(currentState === e_CLOSED){
+		alert("Instruções Aceitas com Sucesso!");
+	}
+	else {
+		alert("Instruções Rejeitadas!!!");
+	}
+}
