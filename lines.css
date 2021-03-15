@@ -87,7 +87,10 @@
 
 	position: absolute;
 	left: 46.4%;
-	top: calc(11.5% - 2px)
+	top: calc(11.5% - 2px);
+
+	display: flex;
+	justify-content: center;
 }
 
 .line3-1{
@@ -151,7 +154,10 @@
 
 	position: absolute;
 	left: 20%;
-	top: calc(27.5% - 2px)
+	top: calc(27.5% - 2px);
+
+	display: flex;
+	justify-content: center;
 }
 
 .line5-1{
@@ -183,6 +189,9 @@
 	position: absolute;
 	top: 41.5%;
 	left: 23.5%;
+
+	display: flex;
+	justify-content: center;
 }
 
 .line6-1{
@@ -356,6 +365,9 @@
 	position: absolute;
 	left: 20%;
 	top: 64%;
+
+	display: flex;
+	justify-content: center;
 }
 
 .line12-2{
@@ -394,6 +406,9 @@
 	position: absolute;
 	left: 43%; /*somar/subtrair 4px*/
 	top: 64%;
+
+	display: flex;
+	justify-content: center;
 }
 
 .line13-2{
@@ -443,6 +458,9 @@
 	position: absolute;
 	left: 23.5%;
 	top: 73.5%;
+
+	display: flex;
+	justify-content: center;
 }
 
 .line15-1{
@@ -541,6 +559,10 @@
 	position: absolute;
 	left: calc(40% - 2px);
 	top: 90%;
+
+	display: flex;
+	justify-content: center;
+	align-content: center;
 }
 
 
@@ -572,6 +594,10 @@
 	position: absolute;
 	left: calc(63% - 2px);
 	top: 90%;
+
+	display: flex;
+	justify-content: center;
+	align-content: center;
 }
 
 
