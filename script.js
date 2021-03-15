@@ -1,3 +1,4 @@
+// Enum dos comandos do sistema.
 const c_LISTEN      = 1;
 const c_CLOSE       = 2;
 const c_CONNECT     = 3;
@@ -10,6 +11,7 @@ const c_TIMEOUT     = 9;
 const combo_syn_ack = 10;
 const combo_fin_ack = 11;
 
+// Enum dos estados do sistema.
 const e_CLOSED       = 1;
 const e_LISTEN       = 2;
 const e_SYN_RECEIVED = 3;
@@ -24,18 +26,23 @@ const e_TIME_WAIT    = 11;
 
 
 
-currentState = e_CLOSED;
-highlightCurrentState(currentState)
-instructions = []
 
 
 
-
+// Função de sleep.
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 
+/* 
+
+	Objeto de transição de estados.
+ 	
+	Toda transição de estado retorna o novo estado, e a linha que deve ser colorida para sair
+	do estado atual para o novo estado.
+
+*/ 
 const transition = {
 	[e_CLOSED]: {
 		[c_LISTEN]: [e_LISTEN, 1],	
@@ -93,13 +100,19 @@ const transition = {
 }
 
 
+// Colore/Descolore uma linha de transição de estado de vermelho.
 function red(num){
+	//Forma a string que representa a classe da linha.
 	parsedNum = String(num);
 	str = "line"+parsedNum+"-color";
 
+
+	//Extrai a lista de linhas com essa classe e sua quantidade.
 	elements = document.getElementsByClassName(str);
 	len = elements.length
 
+
+	//Itera todas as linhas colorindo elas ou removendo sua cor.
 	if(elements[0].style.backgroundColor === ""){
 		for(i = 0; i < len; i++){
 			elements[i].style.backgroundColor = "red"
@@ -115,40 +128,69 @@ function red(num){
 }
 
 
+//Remove o primeiro elemento da lista de logs.
 function removeFirstLogElement(){
-	document.getElementsByClassName("log-line")[0].remove()
+	elements = document.getElementsByClassName("log-line");
+
+	if(elements !== undefined){
+		elements[0].remove()
+	}
 }
 
+
+//Remove elemento da lista de log e da lista de instruções.
 async function removeLogById(id){
+	//Extrai todos os logs existentes e sua quantidade.
 	elements = document.getElementsByClassName("log-line");
 	len = elements.length;
-	index = 0;
 
+
+	index = 0; //Index representa o indice do log no vetor de instruções.
+
+
+	//Itera o vetor elements, buscando o elemento a ser removido.
 	for(i = 0; i < len; i++){
-		if(elements[i].id === id) index = i;
+		if(elements[i].id === id) index = i; //Ao encontrar, define o seu indice.
 	}
 
+
+	//Remove o log da lista de log e da lista de instruções a serem executadas.
 	instructions.splice(index, 1);
 	document.getElementById(id).remove();
 }
 
+
+//Adiciona a instrução no log de instruções pendentes para execução.
 function addLog(text){
+
+	//Referência para a div onde os logs são adicionados.
 	parent = document.getElementsByClassName("pending-commands")[0]
 
+
+	//Define o id do log como o tamanho do vetor mais 1. (os ids variam de 1-n).
 	len = document.getElementsByClassName("log-line").length
 	id = len + 1
 
+
+	//Cria um span para armazenar o log e define seu texto como o comando a ser executado.
 	var child = document.createElement('span')
 	child.className="log-line"
 	child.id = id;
 	child.innerText = text
 
+
+	//Adiciona um evento de click para que o evento seja deletado caso seja clicado.
 	child.addEventListener("click", async () => await removeLogById(event.target.id))
 
+
+	//Adiciona log na div.
 	parent.appendChild(child)
 }
 
 
+// TODO: Modificar a função para permitir a transição de estados sem precisar utilziar
+//       os botões de combo UI. (Essa alteração deve ser realzida para dar mais sentido ao
+//       simulador).
 function tryCombo(inst, instructions){
 	if((inst === c_RECEIVE_ACK && instructions[0] === c_RECEIVE_SYN) || (inst === c_RECEIVE_SYN && instructions[0] === c_RECEIVE_ACK)){
 
@@ -170,13 +212,16 @@ function tryCombo(inst, instructions){
 }
 
 
-
 function highlightCurrentState(currentState){
+	/* 
+		currentState é um numero. Seu valor é convertido para string para pode formar a
+		string utilizada na className da UI.
+	*/
 	parsedState = String(currentState);
-
 	str = "state"+parsedState
 
-	// Enable/Disable the state
+
+	// Habilita/Desabilita o highlight do estado.
 	if(document.getElementsByClassName(str)[0].style.backgroundColor === ""){
 		document.getElementsByClassName(str)[0].style.backgroundColor = "Yellow"
 	}
@@ -187,20 +232,27 @@ function highlightCurrentState(currentState){
 
 
 async function runInstructions(instructions, currentState){
+	
 	len = instructions.length;
 
 	if(instructions === []) return;
 
 	while(instructions !== []){
-		sleepTime = 400
+		sleepTime = 400 // Variável para controlar o atraso na animação.
 
+		//Extrai a primeira instrução do vetor e remove a instrução da UI.
 		inst = instructions.shift();
 		removeFirstLogElement();
 
-		inst = tryCombo(inst, instructions);
 
+		// inst = tryCombo(inst, instructions);
+
+
+		// Realiza a transição de estado.
 		[newState, lineRef] = transition[currentState][inst];
 
+
+		// Animação de troca de estado.
 		await sleep(sleepTime + 200);
 		highlightCurrentState(currentState);
 		await sleep(sleepTime);
@@ -211,27 +263,45 @@ async function runInstructions(instructions, currentState){
 		highlightCurrentState(newState);
 		
 
-
+		// Atualiza Estado atual.
 		currentState = newState;
 	}
 }
 
 
+function setListeners() {
+	// Define a Funcionalidade de cada botão da interface
+	document.getElementsByClassName("btn-LISTEN")[0].addEventListener(       'click', () => {instructions.push(c_LISTEN); addLog("LISTEN", instructions); } );
+	document.getElementsByClassName("btn-CLOSE")[0].addEventListener(        'click', () => {instructions.push(c_CLOSE);  addLog("CLOSE", instructions); } );
+	document.getElementsByClassName("btn-CONNECT")[0].addEventListener(      'click', () => {instructions.push(c_CONNECT); addLog("CONNECT", instructions); } );
+	document.getElementsByClassName("btn-SEND")[0].addEventListener(         'click', () => {instructions.push(c_SEND); addLog("SEND", instructions); } );
+	document.getElementsByClassName("btn-RCV-SYN")[0].addEventListener(      'click', () => {instructions.push(c_RECEIVE_SYN); addLog("RECEIVE SYN", instructions); } );
+	document.getElementsByClassName("btn-RCV-ACK")[0].addEventListener(      'click', () => {instructions.push(c_RECEIVE_ACK); addLog("RECEIVE ACK", instructions); } );
+	document.getElementsByClassName("btn-RST")[0].addEventListener(          'click', () => {instructions.push(c_RST); addLog("RST", instructions); } );
+	document.getElementsByClassName("btn-FIN")[0].addEventListener(          'click', () => {instructions.push(c_FIN); addLog("FIN", instructions); } );
+	document.getElementsByClassName("btn-TIMEOUT")[0].addEventListener(      'click', () => {instructions.push(c_TIMEOUT); addLog("TIMEOUT", instructions); } );
+	document.getElementsByClassName("btn-combo-syn-ack")[0].addEventListener('click', () => {instructions.push(combo_syn_ack); addLog("SYN + ACK", instructions)});
+	document.getElementsByClassName("btn-combo-fin-ack")[0].addEventListener('click', () => {instructions.push(combo_fin_ack); addLog("FIN + ACK", instructions)});
+	document.getElementsByClassName("run-instructions")[0].addEventListener( 'click', () => runInstructions(instructions, currentState) );
+	
+	
+	//Adiciona um Atalho (Barra de Espaço) para o botão "Run Instructions".
+	document.addEventListener("keydown", (e) => { if(e.keyCode === 32){ runInstructions(instructions, currentState)} } )
+}
 
 
-
-document.getElementsByClassName("btn-LISTEN")[0].addEventListener(       'click', () => {instructions.push(c_LISTEN); addLog("LISTEN", instructions); } );
-document.getElementsByClassName("btn-CLOSE")[0].addEventListener(        'click', () => {instructions.push(c_CLOSE);  addLog("CLOSE", instructions); } );
-document.getElementsByClassName("btn-CONNECT")[0].addEventListener(      'click', () => {instructions.push(c_CONNECT); addLog("CONNECT", instructions); } );
-document.getElementsByClassName("btn-SEND")[0].addEventListener(         'click', () => {instructions.push(c_SEND); addLog("SEND", instructions); } );
-document.getElementsByClassName("btn-RCV-SYN")[0].addEventListener(      'click', () => {instructions.push(c_RECEIVE_SYN); addLog("RECEIVE SYN", instructions); } );
-document.getElementsByClassName("btn-RCV-ACK")[0].addEventListener(      'click', () => {instructions.push(c_RECEIVE_ACK); addLog("RECEIVE ACK", instructions); } );
-document.getElementsByClassName("btn-RST")[0].addEventListener(          'click', () => {instructions.push(c_RST); addLog("RST", instructions); } );
-document.getElementsByClassName("btn-FIN")[0].addEventListener(          'click', () => {instructions.push(c_FIN); addLog("FIN", instructions); } );
-document.getElementsByClassName("btn-TIMEOUT")[0].addEventListener(      'click', () => {instructions.push(c_TIMEOUT); addLog("TIMEOUT", instructions); } );
-document.getElementsByClassName("run-instructions")[0].addEventListener( 'click', () => runInstructions(instructions, currentState) );
-
-
-function asd(){
+// REMOVE THIS BEFORE FINISHING THE PROJECT.
+function asd() {
 	console.log(instructions)
 }
+
+
+
+
+
+/* Inicialização do Sistema */
+setListeners();
+
+currentState = e_CLOSED;
+highlightCurrentState(currentState)
+instructions = []
