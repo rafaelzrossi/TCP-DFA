@@ -186,30 +186,30 @@ function addLog(text){
 }
 
 
-// TODO: Modificar a função para permitir a transição de estados sem precisar utilziar
-//       os botões de combo UI. (Essa alteração deve ser realzida para dar mais sentido ao
-//       simulador).
-function tryCombo(inst, instructions){
-	if((inst === c_RECEIVE_ACK && instructions[0] === c_RECEIVE_SYN) || (inst === c_RECEIVE_SYN && instructions[0] === c_RECEIVE_ACK)){
+//
+// function tryCombo(inst, instructions){
+// 	if((inst === c_RECEIVE_ACK && instructions[0] === c_RECEIVE_SYN) || (inst === c_RECEIVE_SYN && instructions[0] === c_RECEIVE_ACK)){
 
-		inst = combo_syn_ack
-		instructions.shift(); //remove the first element
-		removeFirstLogElement();
-	}
+// 		inst = combo_syn_ack
+// 		instructions.shift(); //remove the first element
+// 		removeFirstLogElement();
+// 	}
 
-	else if((inst === c_FIN && instructions[0] === c_RECEIVE_ACK) || (inst === c_RECEIVE_ACK && instructions[0] === c_FIN)){
+// 	else if((inst === c_FIN && instructions[0] === c_RECEIVE_ACK) || (inst === c_RECEIVE_ACK && instructions[0] === c_FIN)){
 
-		inst = combo_fin_ack;
-		instructions.shift(); //remove the first element
-		removeFirstLogElement();
-	}
+// 		inst = combo_fin_ack;
+// 		instructions.shift(); //remove the first element
+// 		removeFirstLogElement();
+// 	}
 
 
 
-	return inst
-}
+// 	return inst
+// }
 
 
+// Destaca qual o estado ativo no momento.
+// Caso o argumento seja um estado que já está ativo, o estado é desativo.
 function highlightCurrentState(currentState){
 	/* 
 		currentState é um numero. Seu valor é convertido para string para pode formar a
@@ -229,9 +229,11 @@ function highlightCurrentState(currentState){
 }
 
 
+// Executa as instruções pendentes.
 async function runInstructions(instructions, currentState){
 	//Informe se durante a execução do sistema, o estado foi alterado alguma vez.
 	hasUpdated = false;
+	ran = false; // Verifica se alguma instrução foi executada.
 
 	[instructions, currentState] = dfaReset(instructions, currentState);
 
@@ -241,6 +243,7 @@ async function runInstructions(instructions, currentState){
 	if(instructions === []) return;
 
 	while(instructions.length !== 0){
+		ran = true;
 		sleepTime = 400 // Variável para controlar o atraso na animação.
 
 		//Extrai a primeira instrução do vetor e remove a instrução da UI.
@@ -271,11 +274,14 @@ async function runInstructions(instructions, currentState){
 		
 	}
 
-	if(hasUpdated) dfaResponse(currentState);
+	dfaResponse(currentState, hasUpdated, ran);
 	return currentState;
 }
 
 
+
+// Adiciona as funcionalidades dos botões da página.
+// Adiciona o atalho "barra de espaço" para executar as instruções pendentes.
 function setListeners() {
 	// Define a Funcionalidade de cada botão da interface
 	document.getElementsByClassName("btn-LISTEN")[0].addEventListener(       'click', () => {instructions.push(c_LISTEN); addLog("LISTEN", instructions); } );
@@ -297,6 +303,9 @@ function setListeners() {
 }
 
 
+// Inicializa o sistema:
+//   Adicionando as funcionalidades dos botões, definindo o estado inicial e limpando as
+//   instruções pendentes.
 function initializeSystem(){
 	setListeners();
 	
@@ -306,6 +315,9 @@ function initializeSystem(){
 }
 
 
+// Reinicia o Sistema:
+//   Desativao estado atual, defina o estado FECHADO como estado atual e limpa as instruções
+//   pendentes.
 function resetSystem(){
 	highlightCurrentState(currentState);
 	currentState = e_CLOSED;
@@ -314,6 +326,8 @@ function resetSystem(){
 }
 
 
+// Reinicia o automato.
+// Utilizado sempre que uma nova sequencia de instruções é executada.
 function dfaReset(instructions, currentState){
 	if(currentState === e_CLOSED){
 		return [instructions, currentState];
@@ -324,10 +338,27 @@ function dfaReset(instructions, currentState){
 	}
 }
 
-function dfaResponse(currentState){
-	if(currentState === e_CLOSED){
+
+// Emite um alerta informando se o aumato executou com sucesso, ou se ele falhou.
+function dfaResponse(currentState, hasUpdated, ran){
+	// if(currentState === e_CLOSED){
+	// 	alert("Instruções Aceitas com Sucesso!");
+	// }
+	// else {
+	// 	alert("Instruções Rejeitadas!!!");
+	// }
+
+	// Se executou alguma instrução e não mudou de estado: Falhou.
+	if(ran === true && hasUpdated === false) {
+		alert("Instruções Rejeitadas!!!");
+	}
+
+	// Se alguma instrução foi executada, o estado foi atualizado e o estado final foi e_CLOSED: Sucesso.
+	else if(ran === true && hasUpdated === true && currentState === e_CLOSED) {
 		alert("Instruções Aceitas com Sucesso!");
 	}
+
+	// Se alguma instrução foi executada, o estado foi atualizado eo estado final foi diferente e_CLOSED: Falhou.
 	else {
 		alert("Instruções Rejeitadas!!!");
 	}

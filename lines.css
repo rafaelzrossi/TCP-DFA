@@ -601,9 +601,18 @@
 }
 
 
+.line-end-00{
+	width: calc(23% + 2px);
+	height: 4px;
+
+	position: absolute;
+	left: 40%;
+	top: 95%;
+}
 
 .line-end-0{
-	width: calc(57% + 2px);
+	/* width: calc(57% + 2px); */
+	width: calc(34% + 2px);
 	height: 4px;
 
 	position: absolute;
