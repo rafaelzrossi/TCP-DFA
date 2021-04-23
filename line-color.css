@@ -1,3 +1,5 @@
+/* Define lines default color as black. */
+/* A line color may change during a aumaton state change to red and then back to black. */
 .line1-color  {	background-color: black; }
 .line2-color  {	background-color: black; }
 .line3-color  {	background-color: black; }

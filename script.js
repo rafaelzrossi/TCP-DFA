@@ -27,10 +27,12 @@ const e_TIME_WAIT    = 11;
 
 
 
+
 // Função de sleep.
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
+
 
 
 /* 
@@ -98,6 +100,7 @@ const transition = {
 }
 
 
+
 // Colore/Descolore uma linha de transição de estado de vermelho.
 function red(num){
 	//Forma a string que representa a classe da linha.
@@ -126,6 +129,7 @@ function red(num){
 }
 
 
+
 //Remove o primeiro elemento da lista de logs.
 function removeFirstLogElement(){
 	elements = document.getElementsByClassName("log-line");
@@ -134,6 +138,7 @@ function removeFirstLogElement(){
 		elements[0].remove()
 	}
 }
+
 
 
 //Remove elemento da lista de log e da lista de instruções.
@@ -156,6 +161,7 @@ async function removeLogById(id){
 	instructions.splice(index, 1);
 	document.getElementById(id).remove();
 }
+
 
 
 //Adiciona a instrução no log de instruções pendentes para execução.
@@ -186,27 +192,6 @@ function addLog(text){
 }
 
 
-//
-// function tryCombo(inst, instructions){
-// 	if((inst === c_RECEIVE_ACK && instructions[0] === c_RECEIVE_SYN) || (inst === c_RECEIVE_SYN && instructions[0] === c_RECEIVE_ACK)){
-
-// 		inst = combo_syn_ack
-// 		instructions.shift(); //remove the first element
-// 		removeFirstLogElement();
-// 	}
-
-// 	else if((inst === c_FIN && instructions[0] === c_RECEIVE_ACK) || (inst === c_RECEIVE_ACK && instructions[0] === c_FIN)){
-
-// 		inst = combo_fin_ack;
-// 		instructions.shift(); //remove the first element
-// 		removeFirstLogElement();
-// 	}
-
-
-
-// 	return inst
-// }
-
 
 // Destaca qual o estado ativo no momento.
 // Caso o argumento seja um estado que já está ativo, o estado é desativo.
@@ -227,6 +212,7 @@ function highlightCurrentState(currentState){
 		document.getElementsByClassName(str)[0].style.backgroundColor = ""
 	}
 }
+
 
 
 // Executa as instruções pendentes.
@@ -303,6 +289,7 @@ function setListeners() {
 }
 
 
+
 // Inicializa o sistema:
 //   Adicionando as funcionalidades dos botões, definindo o estado inicial e limpando as
 //   instruções pendentes.
@@ -313,6 +300,7 @@ function initializeSystem(){
 	highlightCurrentState(currentState)
 	instructions = []
 }
+
 
 
 // Reinicia o Sistema:
@@ -326,6 +314,7 @@ function resetSystem(){
 }
 
 
+
 // Reinicia o automato.
 // Utilizado sempre que uma nova sequencia de instruções é executada.
 function dfaReset(instructions, currentState){
@@ -337,6 +326,7 @@ function dfaReset(instructions, currentState){
 		return [instructions, e_CLOSED];
 	}
 }
+
 
 
 // Emite um alerta informando se o aumato executou com sucesso, ou se ele falhou.

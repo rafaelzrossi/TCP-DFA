@@ -19,7 +19,7 @@
 	<div class="content">
 		<div class="border"></div>
 
-
+		<!-- CLOSED State and Transiction Rules -->
 		<div class="row">
 			<div class="state state1"><span>CLOSED</span></div>
 
@@ -51,6 +51,7 @@
 		</div>
 
 
+		<!-- LISTEN State and Transiction Rules -->
 		<div class="row">
 			<div class="state state2"><span>LISTEN</span></div>
 
@@ -84,6 +85,7 @@
 		</div>
 
 
+		<!-- SYN-SENT State and Transiction Rules -->
 		<div class="row">
 			<div class="state state3"><span>SYN SENT</span></div>
 			<div class="state hidden"><span></span></div>
@@ -112,6 +114,7 @@
 		</div>
 
 
+		<!-- ESTABLISHED State and Transiction Rules -->
 		<div class="row">
 			<div class="state state5"><span>ESTABLISHED</span></div>
 
@@ -133,6 +136,7 @@
 		</div>
 
 
+		<!-- FIN-WAIT-1 State and Transiction Rules -->
 		<div class="row">
 			<div class="state state6"><span>FIN WAIT 1</span></div>
 
@@ -168,6 +172,7 @@
 		</div>
 
 
+		<!-- FIN-WAIT-2 State and Transiction Rules -->
 		<div class="row">
 			<div class="state state7"><span>FIN WAIT 2</span></div>
 			
@@ -206,12 +211,14 @@
 		<div class="border"></div>
 	</div>
 	
+
+	<!-- Commands Interface -->
 	<div class="commands">
 		<div class="header">
 			<span>COMANDOS</span>
 		</div>
 
-
+		<!-- Commands Buttons -->
 		<div class="command-box">
 			<div class="row">
 				<button class="btn-LISTEN">LISTEN</button>
@@ -246,16 +253,19 @@
 		</div>
 
 
+		<!-- Run Instructions -->
 		<div class="btn-run run-instructions">
 			<button>RUN INSTRUCTIONS</button>
 		</div>
 
 
+		<!-- Pending Commands Interface -->
 		<div class="pending-commands">
 		</div>
 	</div>
 
 
+	<!-- Loads automaton script and initialzes it -->
 	<script src="script.js"></script>
 	<script>
 		initializeSystem();
