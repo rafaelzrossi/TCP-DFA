@@ -1,0 +1,274 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TCP-DFA</title>
+
+	<link rel="stylesheet" href="style-new.css">
+	<link rel="stylesheet" href="line-color.css">
+	<link rel="stylesheet" href="lines.css">
+	<link rel="stylesheet" href="subs.css">
+
+	<!-- Loads Google Fonts - Roboto -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+	
+	<div class="content">
+		<div class="border"></div>
+
+		<!-- CLOSED State and Transiction Rules -->
+		<div class="row">
+			<div class="state state1"><span>CLOSED</span></div>
+
+			<div class="line1-0 line1-color">
+				<span class="subs sub01">LISTEN</span>
+				<div class="triangle-down triangle1 line1-color"></div>
+			</div>
+
+			<div class="line2-0 line2-color">
+				<span class="subs sub02">CLOSE</span>
+				<div class="triangle-up triangle2 line2-color"></div>
+			</div>
+
+
+
+			<div class="line3-0 line3-color">
+				<span class="subs sub03">CONNECT</span>
+			</div>
+			<div class="line3-1 line3-color">
+				<div class="triangle-down triangle3 line3-color"></div>
+			</div>
+
+
+			<div class="line4-0 line4-color"></div>
+			<div class="line4-1 line4-color">
+				<span class="subs sub04">CLOSE</span>
+				<div class="triangle-left triangle4 line4-color"></div>
+			</div>
+		</div>
+
+
+		<!-- LISTEN State and Transiction Rules -->
+		<div class="row">
+			<div class="state state2"><span>LISTEN</span></div>
+
+			<div class="line5-0 line5-color">
+				<span class="subs sub05">RECEIVE SYN</span>
+			</div>
+			<div class="line5-1 line5-color">
+				<div class="triangle-down triangle5 line5-color"></div>
+			</div>
+
+
+			<div class="line6-0 line6-color">
+				<span class="subs sub06">RST</span>
+			</div>
+			<div class="line6-1 line6-color">
+				<div class="triangle-up triangle6 line6-color"></div>
+			</div>
+
+
+			<div class="line7-0 line7-color"></div>
+			<div class="line7-1 line7-color">
+				<span class="subs sub07">SEND</span>
+				<div class="triangle-right triangle7 line7-color"></div>
+			</div>
+
+
+			<div class="line8-0 line8-color">
+				<span class="subs sub08">RECEIVE SYN</span>
+				<div class="triangle-left triangle8 line8-color"></div>
+			</div>
+		</div>
+
+
+		<!-- SYN-SENT State and Transiction Rules -->
+		<div class="row">
+			<div class="state state3"><span>SYN SENT</span></div>
+			<div class="state hidden"><span></span></div>
+
+			<div class="line9-0 line9-color"></div>
+			<div class="line9-1 line9-color">
+				<span class="subs sub09">RECEIVE ACK</span>
+				<div class="triangle9 line9-color triangle-right"></div>
+			</div>
+
+			
+			<div class="line10-0 line10-color">
+				<span class="subs sub10">CLOSE</span>
+				<div class="triangle10 line10-color triangle-down"></div>
+			</div>
+
+
+			
+			<div class="state state4"><span>SYN RECEIVED</span></div>
+
+			<div class="line11-0 line11-color"></div>
+			<div class="line11-1 line11-color">
+				<span class="subs sub11">RECEIVE SYN + ACK</span>
+				<div class="triangle11 line11-color triangle-left"></div>
+			</div>
+		</div>
+
+
+		<!-- ESTABLISHED State and Transiction Rules -->
+		<div class="row">
+			<div class="state state5"><span>ESTABLISHED</span></div>
+
+			<div class="line12-0 line12-color"></div>
+			<div class="line12-1 line12-color">
+				<span class="subs sub12">CLOSE</span>
+			</div>
+			<div class="line12-2 line12-color">
+				<div class="triangle12 line12-color triangle-down"></div>
+			</div>
+
+			<div class="line13-0 line13-color"></div>
+			<div class="line13-1 line13-color">
+				<span class="subs sub13">FIN</span>
+			</div>
+			<div class="line13-2 line13-color">
+				<div class="triangle13 line13-color triangle-down"></div>
+			</div>
+		</div>
+
+
+		<!-- FIN-WAIT-1 State and Transiction Rules -->
+		<div class="row">
+			<div class="state state6"><span>FIN WAIT 1</span></div>
+
+			<div class="line14-0 line14-color">
+				<span class="subs sub14">FIN</span>
+				<div class="triangle14 line14-color triangle-right"></div>
+			</div>
+
+			<div class="line15-0 line15-color">
+				<span class="subs sub15">FIN + ACK</span>
+			</div>
+			<div class="line15-1 line15-color"></div>
+			<div class="line15-2 line15-color">
+				<div class="triangle15 line15-color triangle-right"></div>
+			</div>
+
+
+
+			<div class="state state8"><span>CLOSING</span></div>
+			<div class="line18-0 line18-color">
+				<span class="subs sub18">RECEIVE ACK</span>
+				<div class="triangle18 line18-color triangle-down"></div>
+			</div>
+
+
+			<div class="state state9"><span>CLOSE WAIT</span></div>
+
+			<div class="line20-0 line20-color">
+				<span class="subs sub20">CLOSE</span>
+				<div class="triangle20 line20-color triangle-down"></div>
+			</div>
+
+		</div>
+
+
+		<!-- FIN-WAIT-2 State and Transiction Rules -->
+		<div class="row">
+			<div class="state state7"><span>FIN WAIT 2</span></div>
+			
+			<div class="line16-0 line16-color">
+				<span class="subs sub16">RECEIVE ACK</span>
+				<div class="triangle16 line16-color triangle-down"></div>
+			</div>
+
+			<div class="line17-0 line17-color">
+				<span class="subs sub17">FIN</span>
+				<div class="triangle17 line17-color triangle-right"></div>
+			</div>
+
+
+			<div class="state state11"><span>TIME WAIT</span></div>
+
+			<div class="line19-0 line19-color">
+				<span class="subs sub19">TIMEOUT</span>
+			</div>
+
+			<div class="state state10"><span>LAST ACK</span></div>
+
+			<div class="line21-0 line21-color">
+				<span class="subs sub21">RECEIVE ACK</span>
+			</div>
+
+			<div class="line-end-00 line21-color"></div>
+			<div class="line-end-0 line21-color line19-color"></div>
+			<div class="line-end-1 line21-color line19-color"></div>
+			<div class="line-end-2 line21-color line19-color"></div>
+			<div class="line-end-3 line21-color line19-color">
+				<div class="triangle-end line21-color line19-color triangle-down"></div>
+			</div>
+		</div>
+
+		<div class="border"></div>
+	</div>
+	
+
+	<!-- Commands Interface -->
+	<div class="commands">
+		<div class="header">
+			<span>COMANDOS</span>
+		</div>
+
+		<!-- Commands Buttons -->
+		<div class="command-box">
+			<div class="row">
+				<button class="btn-LISTEN">LISTEN</button>
+				<button class="btn-CLOSE">CLOSE</button>
+			</div>
+
+			<div class="row">
+				<button class="btn-CONNECT">CONNECT</button>
+				<button class="btn-SEND">SEND</button>
+			</div>
+
+			<div class="row">
+				<button class="btn-RCV-SYN">RECEIVE SYN</button>
+				<button class="btn-RCV-ACK">RECEIVE ACK</button>
+			</div>
+
+			<div class="row">
+				<button class="btn-RST">RST</button>
+				<button class="btn-FIN">FIN</button>
+			</div>
+
+			<div class="row">
+				<button class="btn-combo-syn-ack">SYN + ACK</button>
+				<button class="btn-combo-fin-ack">FIN + ACK</button>
+			</div>
+
+			<div class="row">
+				<button class="btn-TIMEOUT">TIMEOUT</button>
+			</div>
+
+
+		</div>
+
+
+		<!-- Run Instructions -->
+		<div class="btn-run run-instructions">
+			<button>RUN INSTRUCTIONS</button>
+		</div>
+
+
+		<!-- Pending Commands Interface -->
+		<div class="pending-commands">
+		</div>
+	</div>
+
+
+	<!-- Loads automaton script and initialzes it -->
+	<script src="script.js"></script>
+	<script>
+		initializeSystem();
+	</script>
+</body>
+</html>
